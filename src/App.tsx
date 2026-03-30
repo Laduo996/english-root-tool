@@ -184,7 +184,7 @@ async function analyzeWord(word: string): Promise<WordAnalysis> {
 
   return JSON.parse(response.text);
 }
-
+/*
 async function generateMnemonicImage(prompt: string): Promise<string> {
   const response = await ai.models.generateContent({
     model: 'gemini-2.5-flash-image',
@@ -207,8 +207,8 @@ async function generateMnemonicImage(prompt: string): Promise<string> {
   }
   throw new Error("Failed to generate image");
 }
-
-async function playPronunciation(text: string, accent: 'UK' | 'US' = 'US') {
+*/
+/* async function playPronunciation(text: string, accent: 'UK' | 'US' = 'US') {
   const voiceName = accent === 'UK' ? 'Fenrir' : 'Kore';
   const instruction = accent === 'UK' ? `Pronounce clearly in a British accent: ${text}` : `Pronounce clearly in an American accent: ${text}`;
   
@@ -248,7 +248,7 @@ async function playPronunciation(text: string, accent: 'UK' | 'US' = 'US') {
     source.connect(audioContext.destination);
     source.start();
   }
-}
+}*/
 */ // 
 async function analyzeWord(word: string): Promise<WordAnalysis> {
   return {

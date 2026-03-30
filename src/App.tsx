@@ -248,8 +248,8 @@ async function generateMnemonicImage(prompt: string): Promise<string> {
     source.connect(audioContext.destination);
     source.start();
   }
-}*/
-*/ // 
+}
+*/ 
 async function analyzeWord(word: string): Promise<WordAnalysis> {
   return {
     word: word,
@@ -307,7 +307,7 @@ const handleAdd = async () => {
       ...analysis,
       id: Date.now(),
       mastered: false,
-      createdAt: new Date()
+      createdAt: Date.now()
     };
     setCards(prev => [...prev, newCard]);
     setInput("");
@@ -1022,56 +1022,52 @@ const handleAdd = async () => {
   };
 
   const handleAddWord = async (wordToSearch?: string, e?: FormEvent) => {
-    e?.preventDefault();
-    const targetWord = (wordToSearch || input.trim()).toLowerCase();
-    if (!targetWord || isLoading) return;
+  e?.preventDefault();
+  const targetWord = (wordToSearch || input.trim()).toLowerCase();
+  if (!targetWord || isLoading) return;
 
-    // Check if word already exists in history
-    const existingIndex = cards.findIndex(c => c.analysis.word.toLowerCase() === targetWord);
-    if (existingIndex !== -1) {
-      setCurrentCard(cards[existingIndex]);
-      setCurrentIndex(existingIndex);
-      setIsFlipped(false);
-      setInput("");
-      setView('home');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-
-    setIsLoading(true);
-    setError(null);
+  // 
+  const existingIndex = cards.findIndex(c => c.analysis.word.toLowerCase() === targetWord);
+  if (existingIndex !== -1) {
+    setCurrentCard(cards[existingIndex]);
+    setCurrentIndex(existingIndex);
     setIsFlipped(false);
+    setInput("");
+    setView('home');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
 
-    try {
-      const analysis = await analyzeWord(targetWord);
-      const imageUrl = await generateMnemonicImage(analysis.mnemonicPrompt);
-      
-      // Cache for offline use
-      addToOfflineDict(targetWord, analysis);
+  setIsLoading(true);
+  setError(null);
+  setIsFlipped(false);
 
-      const newCard: Flashcard = {
-        id: Date.now().toString(),
-        analysis,
-        imageUrl,
-        createdAt: Date.now(),
-      };
+  try {
+    const analysis = await analyzeWord(targetWord);
+    const imageUrl = `https://via.placeholder.com/300x300?text=${encodeURIComponent(targetWord)}`;
 
-      setCards(prev => {
-        const filtered = prev.filter(c => c.analysis.word.toLowerCase() !== targetWord.toLowerCase());
-        return [newCard, ...filtered];
-      });
-      setCurrentCard(newCard);
-      setCurrentIndex(0);
-      setInput("");
-      setView('home');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (err) {
-      console.error(err);
-      setError("Failed to analyze word. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    // 
+    const newCard = {
+      id: Date.now(),
+      analysis,
+      imageUrl,
+      mastered: false,
+      createdAt: Date.now() // 
+    };
+
+    setCards(prev => [...prev, newCard]);
+    setCurrentCard(newCard);
+    setCurrentIndex(cards.length);
+    setInput("");
+    setView('home');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (err) {
+    setError('Failed to analyze word. Please try again.');
+    console.error(err);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   const getDiscoveryWord = async (rule: typeof discoveryRule, currentWord: string, value?: string | null): Promise<string> => {
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });

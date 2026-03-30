@@ -569,23 +569,13 @@ const handleAdd = async () => {
                           <div className="flex items-center gap-1.5">
                             <span className="text-[10px] font-bold uppercase tracking-widest">UK</span>
                             <span className="text-sm font-medium text-gray-600">{currentCard.analysis.phoneticUK}</span>
-                            <button 
-                              onClick={(e) => { e.stopPropagation(); playPronunciation(currentCard.analysis.word, 'UK'); }}
-                              className="p-1 hover:bg-gray-100 rounded-full transition-all"
-                            >
-                              <Volume2 size={16} className="text-orange-500 opacity-50 hover:opacity-100" />
-                            </button>
+                            
                           </div>
                           <div className="h-3 w-[1px] bg-gray-200"></div>
                           <div className="flex items-center gap-1.5">
                             <span className="text-[10px] font-bold uppercase tracking-widest">US</span>
                             <span className="text-sm font-medium text-gray-600">{currentCard.analysis.phoneticUS}</span>
-                            <button 
-                              onClick={(e) => { e.stopPropagation(); playPronunciation(currentCard.analysis.word, 'US'); }}
-                              className="p-1 hover:bg-gray-100 rounded-full transition-all"
-                            >
-                              <Volume2 size={16} className="text-orange-500 opacity-50 hover:opacity-100" />
-                            </button>
+                           
                           </div>
                         </div>
                       </div>
@@ -693,12 +683,7 @@ const handleAdd = async () => {
                                   <span className="text-sm font-black text-gray-900 group-hover/col:text-orange-600 transition-colors">
                                     {col.phrase}
                                   </span>
-                                  <button 
-                                    onClick={(e) => { e.stopPropagation(); playPronunciation(col.phrase, 'US'); }}
-                                    className="p-1 hover:bg-white rounded-full transition-all shadow-sm"
-                                  >
-                                    <Volume2 size={12} className="text-orange-500" />
-                                  </button>
+                                  
                                 </div>
                                 <div className="flex items-center gap-1.5">
                                   <span className="text-[10px] font-bold text-gray-400">{col.translation}</span>
@@ -767,12 +752,7 @@ const handleAdd = async () => {
                                             <div className="text-sm font-black truncate">
                                               {renderHighlightedWord(app.word, currentCard.analysis.morphology.prefix || '', 'text-blue-600')}
                                             </div>
-                                            <button 
-                                              onClick={(e) => { e.stopPropagation(); playPronunciation(app.word, 'US'); }}
-                                              className="p-0.5 hover:bg-white rounded-full transition-all shadow-sm opacity-40 group-hover:opacity-100"
-                                            >
-                                              <Volume2 size={10} className="text-blue-500" />
-                                            </button>
+          
                                           </div>
                                           <div className="text-[9px] font-bold text-blue-500/70 truncate">{app.translation}</div>
                                         </button>
@@ -799,12 +779,7 @@ const handleAdd = async () => {
                                             <div className="text-sm font-black truncate">
                                               {renderHighlightedWord(app.word, currentCard.analysis.morphology.root || '', 'text-orange-600')}
                                             </div>
-                                            <button 
-                                              onClick={(e) => { e.stopPropagation(); playPronunciation(app.word, 'US'); }}
-                                              className="p-0.5 hover:bg-white rounded-full transition-all shadow-sm opacity-40 group-hover:opacity-100"
-                                            >
-                                              <Volume2 size={10} className="text-orange-500" />
-                                            </button>
+                                           
                                           </div>
                                           <div className="text-[9px] font-bold text-orange-500/70 truncate">{app.translation}</div>
                                         </button>
@@ -831,12 +806,7 @@ const handleAdd = async () => {
                                             <div className="text-sm font-black truncate">
                                               {renderHighlightedWord(app.word, currentCard.analysis.morphology.suffix || '', 'text-green-600')}
                                             </div>
-                                            <button 
-                                              onClick={(e) => { e.stopPropagation(); playPronunciation(app.word, 'US'); }}
-                                              className="p-0.5 hover:bg-white rounded-full transition-all shadow-sm opacity-40 group-hover:opacity-100"
-                                            >
-                                              <Volume2 size={10} className="text-green-500" />
-                                            </button>
+                                           
                                           </div>
                                           <div className="text-[9px] font-bold text-green-500/70 truncate">{app.translation}</div>
                                         </button>
@@ -1147,19 +1117,21 @@ const handleAdd = async () => {
       setCurrentCard(prev => prev ? { ...prev, masteryStatus: status } : null);
     }
   };
-
-  const handleSpeak = async (e: MouseEvent, text: string, accent: 'UK' | 'US' = 'US') => {
-    e.stopPropagation();
-    if (isSpeaking) return;
-    setIsSpeaking(accent);
-    try {
-      await playPronunciation(text, accent);
-    } catch (err) {
-      console.error("Speech error:", err);
-    } finally {
-      setIsSpeaking(null);
-    }
-  };
+// 
+/*
+const handleSpeak = async (e: MouseEvent, text: string, accent: 'UK' | 'US' = 'US') => {
+  e.stopPropagation();
+  if (isSpeaking) return;
+  setIsSpeaking(accent);
+  try {
+    await playPronunciation(text, accent);
+  } catch (err) {
+    console.error("Speech error:", err);
+  } finally {
+    setIsSpeaking(null);
+  }
+};
+*/
 
   const highlightPart = (word: string, origin: string, typeOrClass: 'prefix' | 'root' | 'suffix' | string) => {
     if (!origin) return word;

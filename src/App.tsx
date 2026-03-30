@@ -253,7 +253,7 @@ async function playPronunciation(text: string, accent: 'UK' | 'US' = 'US') {
 async function analyzeWord(word: string): Promise<WordAnalysis> {
   return {
     word: word,
-    phoneticUK: "/ˈwɜːd/",
+    phoneticUK: "/'wɜːd/",
     phoneticUS: "/wɜːrd/",
     meaning: "单词；话语；消息",
     etymology: "源自古英语 `word`，与荷兰语 `woord`、德语 `Wort` 同源，本义为“说出来的东西”",
@@ -267,11 +267,7 @@ async function analyzeWord(word: string): Promise<WordAnalysis> {
     },
     synonyms: ["term", "expression", "phrase"],
     antonyms: [],
-    familyWords: ["wording", "wordless", "wordplay"],
-    rootApplications: [
-      { word: "wording", translation: "措辞；用语" },
-      { word: "wordless", translation: "无言的；沉默的" },
-      { word: "wordplay", translation: "双关语；文字游戏" }
+    familyWords: ["wording", "wordless", "wordplay"]
     ]
   };
 }
@@ -298,7 +294,31 @@ export default function App() {
   const [discoveryRule, setDiscoveryRule] = useState<'history' | 'random' | 'root' | 'prefix' | 'suffix' | 'synonym'>('history');
   const [discoveryValue, setDiscoveryValue] = useState<string | null>(null);
   const [showDiscoverySettings, setShowDiscoverySettings] = useState(false);
-
+// 
+// 
+const handleAdd = async () => {
+  if (!input.trim()) return;
+  setIsLoading(true);
+  setError(null);
+  
+  try {
+    const analysis = await analyzeWord(input);
+    const newCard = {
+      ...analysis,
+      id: Date.now(),
+      mastered: false,
+      createdAt: new Date()
+    };
+    setCards(prev => [...prev, newCard]);
+    setInput("");
+  } catch (err) {
+    setError("添加失败，请重试");
+    console.error(err);
+  } finally {
+    setIsLoading(false);
+  }
+};
+//
   const DiscoverySettings = () => (
     <div className="bg-white rounded-3xl border border-gray-100 shadow-xl p-6 space-y-6">
       <div className="flex items-center justify-between">

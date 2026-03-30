@@ -11,8 +11,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-      - run: npm install
+   
+      - run: npm install --no-lockfile
       - run: npm run build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4

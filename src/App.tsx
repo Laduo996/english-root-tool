@@ -249,7 +249,32 @@ async function playPronunciation(text: string, accent: 'UK' | 'US' = 'US') {
     source.start();
   }
 }
-*/
+*/ // 
+async function analyzeWord(word: string): Promise<WordAnalysis> {
+  return {
+    word: word,
+    phoneticUK: "/ˈwɜːd/",
+    phoneticUS: "/wɜːrd/",
+    meaning: "单词；话语；消息",
+    etymology: "源自古英语 `word`，与荷兰语 `woord`、德语 `Wort` 同源，本义为“说出来的东西”",
+    morphology: {
+      prefix: "",
+      prefixMeaning: "",
+      root: "word",
+      rootMeaning: "说话，言语",
+      suffix: "",
+      suffixMeaning: ""
+    },
+    synonyms: ["term", "expression", "phrase"],
+    antonyms: [],
+    familyWords: ["wording", "wordless", "wordplay"],
+    rootApplications: [
+      { word: "wording", translation: "措辞；用语" },
+      { word: "wordless", translation: "无言的；沉默的" },
+      { word: "wordplay", translation: "双关语；文字游戏" }
+    ]
+  };
+}
 // --- Components ---
 
 export default function App() {

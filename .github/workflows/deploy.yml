@@ -19,10 +19,8 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22 # 解决 Node 20 过时的警告
-          # 注意：如果执行完步骤 1 推送了 lock 文件，保留下面这一行
-          # 如果你死活不想提交 lock 文件，就把下面这行删掉
-          cache: 'npm' 
+          node-version: 24
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm install

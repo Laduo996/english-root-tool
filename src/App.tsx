@@ -1014,26 +1014,31 @@ const handleAdd = async () => {
 
   try {
     const analysis = await analyzeWord(targetWord);
+    // 
     const imageUrl = `https://via.placeholder.com/300x300?text=${encodeURIComponent(targetWord)}`;
 
-    // 
-    const newCard = {
-      id: Date.now(),
+    // 离线缓存
+    addToOfflineDict(targetWord, analysis);
+
+    const newCard: Flashcard = {
+      id: Date.now().toString(),
       analysis,
       imageUrl,
-      mastered: false,
-      createdAt: Date.now() // 
+      createdAt: Date.now()
     };
 
-    setCards(prev => [...prev, newCard]);
+    setCards(prev => {
+      const filtered = prev.filter(c => c.analysis.word.toLowerCase() !== targetWord.toLowerCase());
+      return [newCard, ...filtered];
+    });
     setCurrentCard(newCard);
-    setCurrentIndex(cards.length);
+    setCurrentIndex(0);
     setInput("");
     setView('home');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } catch (err) {
-    setError('Failed to analyze word. Please try again.');
     console.error(err);
+    setError("Failed to analyze word. Please try again.");
   } finally {
     setIsLoading(false);
   }

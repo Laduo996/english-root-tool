@@ -29,28 +29,22 @@ export default defineConfig(({mode}) => {
               short_name: 'Study',
               description: 'Start your daily vocabulary study',
               url: '/english-root-tool/',
-              icons: [{ src: 'pwa-icon.svg', sizes: '192x192' }]
+              
             },
             {
               name: 'Etymology Explorer',
               short_name: 'Etymology',
               description: 'Explore word roots and prefixes',
               url: '/english-root-tool/?view=etymology',
-              icons: [{ src: 'pwa-icon.svg', sizes: '192x192' }]
+             
             }
           ],
           icons: [
             {
-              src: 'pwa-icon.svg',
-              sizes: '192x192 512x512',
-              type: 'image/svg+xml',
-              purpose: 'any'
-            },
-            {
-              src: 'pwa-icon.svg',
-              sizes: '192x192 512x512',
-              type: 'image/svg+xml',
-              purpose: 'maskable'
+               src: '/english-root-tool/pwa-icon.svg',
+    sizes: '512x512',
+    type: 'image/svg+xml',
+    purpose: 'any maskable',
             }
           ]
         },

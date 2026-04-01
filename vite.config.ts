@@ -1,12 +1,14 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+// Ensure: not importing vite-plugin-pwa or similar plugins!
+
 export default defineConfig({
-  // 核心：base必须和仓库名完全一致
+  // Ensure the base matches your GitHub repo name for Pages
   base: '/english-root-tool/',
-  plugins: [react()],
+  plugins: [react()], // No PWA plugin
   build: {
-    // 彻底禁用eval，从构建阶段消除
+    // Disables 'eval' in build output
     terserOptions: {
       compress: {
         evaluate: false,

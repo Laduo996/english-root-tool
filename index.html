@@ -1,31 +1,22 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>EtymMaster - English Etymology Master</title>
-    <meta name="description" content="AI-powered English vocabulary mastery through etymology and visual memory." />
-    <meta name="theme-color" content="#f97316" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="EtymMaster" />
-    <link rel="apple-touch-icon" href="/pwa-icon.svg" />
-    <!-- 🔴 核心修复：给script-src添加'unsafe-eval'，彻底解决eval拦截 -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self';
-              script-src 'self' 'unsafe-eval' 'wasm-unsafe-eval';
-              style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-              img-src 'self' data: /english-root-tool/;
-              connect-src 'self' https://generativelanguage.googleapis.com;
-              worker-src 'self' blob:;
-              base-uri 'self';
-              form-action 'self';"
-    >
-  </head>
-  <body>
-    <div id="root"></div>
-    <!-- 🔴 核心修复：路径固定为/src/main.tsx，禁止手动加仓库名 -->
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>EtymMaster - English Etymology Master</title>
+  <meta name="description" content="AI-powered English vocabulary mastery through etymology and visual memory." />
+  <meta name="theme-color" content="#f97316" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="EtymMaster" />
+  <link rel="apple-touch-icon" href="/pwa-icon.svg" />
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-eval' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: /english-root-tool/; connect-src 'self' https://generativelanguage.googleapis.com; worker-src 'self' blob:; base-uri 'self'; form-action 'self';"
+  >
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
 </html>

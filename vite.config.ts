@@ -7,6 +7,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
+    base: '/english-root-tool/',
     plugins: [
       react(), 
       tailwindcss(),
@@ -21,20 +22,20 @@ export default defineConfig(({mode}) => {
           background_color: '#ffffff',
           display: 'standalone',
           orientation: 'portrait',
-          start_url: '/',
+          start_url: '/english-root-tool/',
           shortcuts: [
             {
               name: 'Study Now',
               short_name: 'Study',
               description: 'Start your daily vocabulary study',
-              url: '/',
+              url: '/english-root-tool/',
               icons: [{ src: 'pwa-icon.svg', sizes: '192x192' }]
             },
             {
               name: 'Etymology Explorer',
               short_name: 'Etymology',
               description: 'Explore word roots and prefixes',
-              url: '/?view=etymology',
+              url: '/english-root-tool/?view=etymology',
               icons: [{ src: 'pwa-icon.svg', sizes: '192x192' }]
             }
           ],
@@ -63,7 +64,7 @@ export default defineConfig(({mode}) => {
                 cacheName: 'google-fonts-cache',
                 expiration: {
                   maxEntries: 10,
-                  maxAgeSeconds: 60 * 60 * 24 * 365 // <== 365 days
+                  maxAgeSeconds: 60 * 60 * 24 * 365
                 },
                 cacheableResponse: {
                   statuses: [0, 200]
@@ -77,7 +78,7 @@ export default defineConfig(({mode}) => {
                 cacheName: 'gstatic-fonts-cache',
                 expiration: {
                   maxEntries: 10,
-                  maxAgeSeconds: 60 * 60 * 24 * 365 // <== 365 days
+                  maxAgeSeconds: 60 * 60 * 24 * 365
                 },
                 cacheableResponse: {
                   statuses: [0, 200]
@@ -91,7 +92,7 @@ export default defineConfig(({mode}) => {
                 cacheName: 'picsum-images-cache',
                 expiration: {
                   maxEntries: 50,
-                  maxAgeSeconds: 60 * 60 * 24 * 30 // <== 30 days
+                  maxAgeSeconds: 60 * 60 * 24 * 30
                 }
               }
             }
@@ -108,8 +109,6 @@ export default defineConfig(({mode}) => {
       },
     },
     server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
     },
   };

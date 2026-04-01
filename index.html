@@ -10,6 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="EtymMaster" />
     <link rel="apple-touch-icon" href="/pwa-icon.svg" />
+    <!-- 🔴 核心修复：给script-src添加'unsafe-eval'，彻底解决eval拦截 -->
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self';
@@ -24,7 +25,7 @@
   </head>
   <body>
     <div id="root"></div>
-    <!-- 🔴 关键：src必须是/src/main.tsx，不要加/english-root-tool/ -->
+    <!-- 🔴 核心修复：路径固定为/src/main.tsx，禁止手动加仓库名 -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

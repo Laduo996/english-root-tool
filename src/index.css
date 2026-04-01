@@ -1,1 +1,45 @@
-@import "tailwindcss";
+/* 🔴 标准3D卡片翻转CSS，兼容所有环境，彻底解决镜像 */
+.flashcard-wrapper {
+  perspective: 1200px;
+  width: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flashcard-wrapper.flipped .flashcard-inner {
+  transform: rotateY(180deg);
+}
+
+.flashcard-front, .flashcard-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
+
+.flashcard-front {
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+.flashcard-back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+/* 🔴 关键：背面内容容器，再转180°，彻底抵消镜像 */
+.flashcard-back-content {
+  transform: rotateY(180deg);
+  width: 100%;
+  height: 100%;
+}
